@@ -1,39 +1,94 @@
-* { box-sizing: border-box; }
-
 body {
-  font: 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-        "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-  margin: 20px;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 24px;
+  background-color: #fff;
 }
 
-ol, ul { padding-left: 30px; }
+/* Layout */
+.game {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  margin-top: 50px;
+  position: relative;
+  z-index: 0;
+}
 
-.board-row:after { clear: both; content: ""; display: table; }
-
-.status { margin-bottom: 10px; font-weight: bold; }
-
-.square {
-  background: #fff;
-  border: 1px solid #999;
-  float: left;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 34px;
-  height: 34px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
+.game-board {
   text-align: center;
-  width: 34px;
+  z-index: 1;
+}
+
+.status {
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+/* Board */
+.board-row {
+  display: flex;
+  justify-content: center;
+}
+
+/* Squares */
+.square {
+  width: 80px;
+  height: 80px;
+  margin: 6px;
+  font-size: 26px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  background-color: #fff;
   cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  z-index: 2;
 }
 
 .square:hover {
-  background: #f0f0f0;
+  background-color: #f2f2f2;
+  transform: scale(1.05);
 }
 
-.square:focus { outline: none; }
+.square:disabled {
+  cursor: default;
+  opacity: 0.85;
+}
 
-.game { display: flex; flex-direction: row; justify-content: center; }
+/* Game info panel */
+.game-info {
+  margin-left: 20px;
+  z-index: 1;
+  font-size: 15px;
+}
 
-.game-info { margin-left: 20px; }
+.game-info ol {
+  padding-left: 20px;
+  text-align: left;
+}
+
+/* Buttons */
+button {
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 5px;
+  border: 1px solid #999;
+  background: #f9f9f9;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  z-index: 3;
+}
+
+button:hover {
+  background: #e8e8e8;
+}
+
+/* Make sure clicks always register */
+.square,
+button {
+  position: relative;
+  z-index: 10;
+}
